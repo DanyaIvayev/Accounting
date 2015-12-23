@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/mainview"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/oper_list_item"
+        android:orientation="horizontal"
+
+        android:weightSum="1">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/o_date"
+                android:id="@+id/dateT"
+                android:textSize="18sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/dateTV"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+                android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:typeface="normal"
+                android:maxWidth="250dp"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentLeft="false"
+                android:layout_toRightOf="@+id/dateT"
+                android:textColor="@android:color/black"></TextView>
+
+            <TextView
+                android:id="@+id/valueTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+                android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+                android:textSize="20sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:maxWidth="135dp"
+                android:textColor="@android:color/black"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/o_type"
+                android:id="@+id/typeT"
+                android:layout_below="@+id/dateT"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="8dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/typeTV"
+                android:textSize="18sp"
+                android:layout_alignTop="@+id/typeT"
+                android:layout_toRightOf="@+id/typeT"
+                android:textColor="@android:color/black" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>
