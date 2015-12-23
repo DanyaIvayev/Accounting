@@ -50,7 +50,7 @@ public class AddApplicationTest extends ActivityInstrumentationTestCase2<AddOper
         mActivity = getActivity();
         valueTV = (EditText) mActivity.findViewById(R.id.operValueET);
         operDesc = (EditText) mActivity.findViewById(R.id.operDescriptionET);
-        okButton = (Button) mActivity.findViewById(R.id.okButton);
+        okButton = (Button) mActivity.findViewById(R.id.okAddButton);
         mActivity.runOnUiThread(new Runnable() {
             public void run() {
                 valueTV.setText(String.valueOf(1350.56));

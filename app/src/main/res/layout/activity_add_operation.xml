@@ -172,7 +172,7 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="@string/ok"
-                    android:id="@+id/okButton"
+                    android:id="@+id/okAddButton"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true" />
 

@@ -78,7 +78,7 @@ public class AddOperationActivity extends ActionBarActivity {
             if (((String) typeSpinner.getSelectedItem()).equals(getString(R.string.transfer))) {
                 settingCategorySpinner(categorySpinner, ((String) typeSpinner.getSelectedItem()));
             }
-            Button ok = (Button) findViewById(R.id.okButton);
+            Button ok = (Button) findViewById(R.id.okAddButton);
             ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
