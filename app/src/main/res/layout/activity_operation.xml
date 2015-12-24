@@ -3,10 +3,17 @@
     android:layout_height="match_parent"
     tools:context="com.example.accounting.OperationActivity">
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/operMessage"
+        android:background="@drawable/oper_list_item" />
+
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/operListView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/operMessage" />
 </RelativeLayout>

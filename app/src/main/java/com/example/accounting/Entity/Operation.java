@@ -1,5 +1,8 @@
 package com.example.accounting.Entity;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
 /**
  * Created by Дамир on 18.12.2015.
  */
@@ -22,7 +25,14 @@ public class Operation {
         id = ++incID;
         this.date = date;
         this.type = type;
-        this.value = value;
+        this.value = Math.round( value * 100.0 ) / 100.0;
+//        DecimalFormat df = new DecimalFormat("#.##");
+//        String formate = df.format(value);
+//        try {
+//            this.value = (Double) df.parse(formate);
+//        } catch (ParseException pe){
+//            pe.printStackTrace();
+//        }
         this.billFrom = billFrom;
         this.description = description;
         this.category=category;
@@ -33,7 +43,14 @@ public class Operation {
         id = ++incID;
         this.date = date;
         this.type = type;
-        this.value = value;
+//        DecimalFormat df = new DecimalFormat("#.##");
+//        String formate = df.format(value);
+//        try {
+//            this.value = (Double) df.parse(formate);
+//        } catch (ParseException pe){
+//            pe.printStackTrace();
+//        }
+        this.value = Math.round( value * 100.0 ) / 100.0;
         this.billFrom = billFrom;
         this.description = description;
         this.billTo = billTo;
@@ -70,7 +87,14 @@ public class Operation {
     }
 
     public void setValue(double value) {
-        this.value = value;
+//        DecimalFormat df = new DecimalFormat("#.##");
+//        String formate = df.format(value);
+//        try {
+//            this.value = (Double) df.parse(formate);
+//        } catch (ParseException pe){
+//            pe.printStackTrace();
+//        }
+        this.value = Math.round( value * 100.0 ) / 100.0;
     }
 
     public int getBillFrom() {

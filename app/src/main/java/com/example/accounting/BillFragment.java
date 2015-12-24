@@ -354,7 +354,7 @@ public class BillFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_bill, null);
-        mListView = (ListView) v.findViewById(android.R.id.list);
+        mListView = (ListView) v.findViewById(R.id.billListView);
         mListView.setAdapter(null);
 
         ((MainActivity)getActivity()).setArray(null);

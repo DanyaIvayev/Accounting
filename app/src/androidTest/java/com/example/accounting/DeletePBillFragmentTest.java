@@ -28,6 +28,9 @@ import java.util.ArrayList;
 public class DeletePBillFragmentTest  extends ActivityInstrumentationTestCase2<MainActivity> {
     MainActivity mActivity;
     BillFragment billFragment;
+    String deletedBillName;
+    String deletedDescription;
+    double deletedBalance;
     public DeletePBillFragmentTest(){
         super(MainActivity.class);
     }
@@ -39,14 +42,18 @@ public class DeletePBillFragmentTest  extends ActivityInstrumentationTestCase2<M
         billFragment = mActivity.getBillFragment();
 
     }
-    @Test
-    @UiThreadTest
+    //@Test
+    //@UiThreadTest
     public void testDeleteOperation() {
         assertNotNull(mActivity);
         assertNotNull(billFragment);
         ArrayList<BillFragment.BillItem> billItems = billFragment.getBillList();
         if(billItems.size()>=2) {
-            int idFrom = billItems.get(0).getId(); //удаляем с нулевой
+            BillFragment.BillItem first = billItems.get(0);
+            int idFrom = first.getId(); //удаляем с нулевой
+            deletedBillName=first.getBillName();
+            deletedBalance=first.getBalance();
+            deletedDescription=first.getDescription();
             int idTo = billItems.get(1).getId(); // переносим в первый
             billFragment.setIdFrom(idFrom);
             billFragment.setIdTo(idTo);
@@ -109,6 +116,12 @@ public class DeletePBillFragmentTest  extends ActivityInstrumentationTestCase2<M
     }
     @After
     public void tearDown() throws Exception{
+        mActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                mActivity.createAndWriteObject(new Bill(deletedBillName, deletedDescription, deletedBalance), BillFragment.BILLFILE, null);
+            }
+        });
         super.tearDown();
+
     }
 }

@@ -1,5 +1,8 @@
 package com.example.accounting.Entity;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
 /**
  * Created by Дамир on 18.12.2015.
  */
@@ -14,7 +17,15 @@ public class Bill {
         id = ++incID;
         this.billName = billName;
         this.description = description;
-        this.balance = balance;
+        this.balance = Math.round( balance * 100.0 ) / 100.0;
+//        DecimalFormat df = new DecimalFormat("#.##");
+//        String formate = df.format(balance);
+//        try {
+//            this.balance = (Double) df.parse(formate);
+//        } catch (ParseException pe){
+//            pe.printStackTrace();
+//        }
+
     }
 
     public int getId() {
@@ -46,7 +57,14 @@ public class Bill {
     }
 
     public void setBalance(double balance) {
-        this.balance = balance;
+//        DecimalFormat df = new DecimalFormat("#.##");
+//        String formate = df.format(balance);
+//        try {
+//            this.balance = (Double) df.parse(formate);
+//        } catch (ParseException pe){
+//            pe.printStackTrace();
+//        }
+        this.balance = Math.round( balance * 100.0 ) / 100.0;
     }
 
     public static void setIncID(int incID) {

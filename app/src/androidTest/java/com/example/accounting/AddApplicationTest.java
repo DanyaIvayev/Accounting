@@ -60,8 +60,8 @@ public class AddApplicationTest extends ActivityInstrumentationTestCase2<AddOper
         getInstrumentation().waitForIdleSync();
     }
 
-    @Test
-    @UiThreadTest
+   // @Test
+   // @UiThreadTest
     public void testAddOperation(){
         assertNotNull(mActivity);
         first = mActivity.getFrom(); // Получаем первоначальный объект счета

@@ -46,8 +46,8 @@ public class DeleteOperationTest extends ActivityInstrumentationTestCase2<Operat
         mActivity = getActivity();
     }
 
-    @Test
-    @UiThreadTest
+   // @Test
+    //@UiThreadTest
     public void testDeleteOperation() {
         assertNotNull(mActivity);
         items = mActivity.getOperList();

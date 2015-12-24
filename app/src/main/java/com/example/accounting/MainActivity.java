@@ -4,8 +4,10 @@ package com.example.accounting;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -27,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -106,11 +109,15 @@ public class MainActivity extends ActionBarActivity implements BillFragment.OnFr
             case R.id.action_add_rate:{
                 showCategoryDialog(false);
             } break;
+            case R.id.search:{
+                showSearchDialog();
+            } break;
 
         }
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -262,6 +269,39 @@ public class MainActivity extends ActionBarActivity implements BillFragment.OnFr
                 }).show();
     }
 
+    private void showSearchDialog(){
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View searchDialogView = factory.inflate(
+                R.layout.search_dialog, null);
+        final AlertDialog.Builder searchDialog = new AlertDialog.Builder(this);
+        searchDialog.setView(searchDialogView)
+                .setTitle(R.string.search_title)
+                .setMessage(R.string.search_message)
+                .setIcon(android.R.drawable.ic_menu_search)
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText description = (EditText) searchDialogView.findViewById(R.id.searchdescET);
+                        String desc = description.getText().toString();
+                        startOperSearcActivity(desc);
+                    }
+                });
+        searchDialog.show();
+    }
+
+    private void startOperSearcActivity(String desc){
+        Intent intent = new Intent(this, OperationActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(getString(R.string.description), desc);
+        startActivity(intent);
+    }
+
     private void showAddBillDialog(){
         LayoutInflater factory = LayoutInflater.from(this);
         final View billDialogView = factory.inflate(
@@ -285,7 +325,7 @@ public class MainActivity extends ActionBarActivity implements BillFragment.OnFr
                         String desc = description.getText().toString();
                         createAndWriteObject(new Bill(billname.getText().toString(),
                                 description.getText().toString(),
-                                Double.parseDouble(balance.getText().toString())), BillFragment.BILLFILE, null);
+                                Double.valueOf(balance.getText().toString())), BillFragment.BILLFILE, null);
                     }
                 });
 

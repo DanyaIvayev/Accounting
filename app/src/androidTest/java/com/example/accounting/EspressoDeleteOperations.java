@@ -4,13 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.BoundedMatcher;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,24 +53,18 @@ public class EspressoDeleteOperations {
         }
     };
 
-    @Test
+    //@Test
     public void deleteOper() {
 //          onData(is(instanceOf(OperationActivity.OperAdapter.class)))
 //                  .inAdapterView(allOf(withId(R.id.operListView), isDisplayed()))
 //                  .perform(scrollTo());
     //    onData(anything()).inAdapterView(withId(R.id.operListView)).atPosition(5).perform(click());
+
         Espresso.onData(is(instanceOf(OperationActivity.OperAdapter.class))) .inAdapterView(withId(R.id.operListView));
         onData(allOf(is(instanceOf(OperItem.class)), withListItemCheck("1350.54"))).perform(click());
-//        onData(hasToString(startsWith("1350.54")))
-//                .inAdapterView(withId(R.id.operListView))
-//                .perform(click());
-//        onView(withId(R.id.typeSpinner)).perform(click());
-//        onData(allOf(is(instanceOf(String.class)), is("Перевод"))).perform(click());
-//        onView(withId(R.id.typeSpinner)).check(matches(withSpinnerText(containsString("Перевод"))));
-//        onView(withId(R.id.operValueET)).perform(typeText("1350.54"));
-//        onView(withId(R.id.billToSpinner)).check(matches(isEnabled()));
-//        onView(withId(R.id.operValueET)).perform(typeText("Описание"));
-//        onView(withId(R.id.okButton)).perform(click());
+        onView(withText(R.string.menu_delete)).check(matches(isDisplayed()));
+        onView(withText(R.string.menu_delete))
+                .perform(click());
     }
     public static Matcher<Object> withListItemCheck(final String value) {
 

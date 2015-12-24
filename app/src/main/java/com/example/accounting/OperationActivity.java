@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -45,25 +46,38 @@ public class OperationActivity extends ActionBarActivity {
     int id=-1;
     int index=-1;
     String billFrom;
+    String description;
     Operation deletedOper;
     Bill billFro = null;
     Bill billTo = null;
+    TextView operMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
         Bundle extras = getIntent().getExtras();
+
         if(extras!=null) {
+            operMessage= (TextView) findViewById(R.id.operMessage);
             id = extras.getInt(getString(R.string.id));
             billFrom = extras.getString(getString(R.string.billname));
             if(billFrom==null) {
-                index = extras.getInt(getString(R.string.index));
-                findBillByIndex();
-                if(billFrom!=null)
+                description=extras.getString(getString(R.string.description));
+                if(description!=null){
+                    operMessage.setText(getString(R.string.oper_mes_search));
                     fillListView();
+                } else {
+                    index = extras.getInt(getString(R.string.index));
+                    findBillByIndex();
+                    if (billFrom != null) {
+                        operMessage.setText(getString(R.string.oper_mes_bill)+" "+billFrom);
+                        fillListView();
+                    }
+                }
             } else {
-
-            fillListView();}
+                operMessage.setText(getString(R.string.oper_mes_bill)+" "+billFrom);
+                fillListView();
+            }
         }
     }
 
@@ -103,38 +117,54 @@ public class OperationActivity extends ActionBarActivity {
                     JSONObject item = operArray.getJSONObject(i);
                     Gson gson = new Gson();
                     Operation oper = (Operation) gson.fromJson(item.toString(), Operation.class);
-                    if(oper.getBillFrom()==id) {
-                        if (oper.getType() == Operation.TRANSFER) {
-                            readJsonObject(BillFragment.BILLFILE);
-                            int idTO = oper.getBillTo();
-                            String billTo="";
-                            if(array!=null){
-                                for(int j=0; j<array.length(); j++){
-                                    JSONObject item2 = array.getJSONObject(j);
-                                    Gson gson2 = new Gson();
-                                    Bill bill = (Bill) gson2.fromJson(item2.toString(), Bill.class);
-                                    if(bill.getId()==idTO){
-                                        billTo = bill.getBillName();
-                                    }
-                                }
-                            }
-                            operList.add(new OperItem(oper.getId(), oper.getDate(), getString(R.string.transfer), billFrom,billTo,
-                                    "", oper.getDescription(), oper.getValue()));
-                        } else {
-                            if(oper.getType()==Operation.INCOME)
-                                operList.add(new OperItem(oper.getId(), oper.getDate(), getString(R.string.income), billFrom, "",
-                                        oper.getCategory(), oper.getDescription(), oper.getValue()));
-                            else
-                                operList.add(new OperItem(oper.getId(), oper.getDate(), getString(R.string.rate), billFrom, "",
-                                        oper.getCategory(), oper.getDescription(), oper.getValue()));
+                    if(description==null) {
+                        if (oper.getBillFrom() == id) {
+                            addOperToList(oper);
+                        }
+                    } else {
+                        if (oper.getDescription().toLowerCase().contains(description.toLowerCase())) {
+                            addOperToList(oper);
                         }
                     }
                 }
+                if(operList.isEmpty())
+                    operMessage.setText(operMessage.getText().toString() +"\n"+getString(R.string.oper_mes_notfound));
                 mListView.setAdapter(new OperAdapter(this, R.layout.oper_list_item, operList));
             } catch (JSONException ex){
                 Log.e(TAG, "onCreateView "+ex.getMessage());
             }
 
+        }
+    }
+
+    private void addOperToList(Operation oper){
+        try {
+            if (oper.getType() == Operation.TRANSFER) {
+                readJsonObject(BillFragment.BILLFILE);
+                int idTO = oper.getBillTo();
+                String billTo = "";
+                if (array != null) {
+                    for (int j = 0; j < array.length(); j++) {
+                        JSONObject item2 = array.getJSONObject(j);
+                        Gson gson2 = new Gson();
+                        Bill bill = (Bill) gson2.fromJson(item2.toString(), Bill.class);
+                        if (bill.getId() == idTO) {
+                            billTo = bill.getBillName();
+                        }
+                    }
+                }
+                operList.add(new OperItem(oper.getId(), oper.getDate(), getString(R.string.transfer), billFrom, billTo,
+                        "", oper.getDescription(), oper.getValue()));
+            } else {
+                if (oper.getType() == Operation.INCOME)
+                    operList.add(new OperItem(oper.getId(), oper.getDate(), getString(R.string.income), billFrom, "",
+                            oper.getCategory(), oper.getDescription(), oper.getValue()));
+                else
+                    operList.add(new OperItem(oper.getId(), oper.getDate(), getString(R.string.rate), billFrom, "",
+                            oper.getCategory(), oper.getDescription(), oper.getValue()));
+            }
+        }catch (JSONException ex){
+            Log.e(TAG, "onCreateView "+ex.getMessage());
         }
     }
 

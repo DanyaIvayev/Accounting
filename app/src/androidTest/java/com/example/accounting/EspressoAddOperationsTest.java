@@ -45,8 +45,8 @@ public class EspressoAddOperationsTest  {
         }
     };
 
-    @Test
-    public void fill() {
+    //@Test
+    public void addOperationEspresso() {
         onView(withId(R.id.typeSpinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Перевод"))).perform(click());
         onView(withId(R.id.typeSpinner)).check(matches(withSpinnerText(containsString("Перевод"))));

@@ -28,6 +28,9 @@
     <string name="category_incometitle">Добавление категории доходов</string>
     <string name="category_ratetitle">Добавление категории расходов</string>
     <string name="operation_title">Добавление операции</string>
+    <string name="search_title">Поиск операций</string>
+    <string name="search_hint">Search hint</string>
+    <string name="search_message">Введите строку для поиска</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_description">DescriptionActivity</string>
@@ -60,4 +63,7 @@
     <string name="bill_delete_message">Выберите на какой счет перенести операции</string>
     <string name="bill_delete_req">Требуется другой счет, на который можно перенести все операции</string>
     <string name="title_activity_oper_description">OperDescriptionActivity</string>
+    <string name="oper_mes_search">Поиск по описанию</string>
+    <string name="oper_mes_bill">Операции счета: </string>
+    <string name="oper_mes_notfound">Операции не найдены</string>
 </resources>
