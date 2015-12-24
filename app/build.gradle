@@ -6,11 +6,12 @@ android {
 
     defaultConfig {
         applicationId "com.example.accounting"
-        minSdkVersion 16
-        targetSdkVersion 16
+        minSdkVersion 18
+        targetSdkVersion 18
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -30,4 +31,6 @@ dependencies {
     androidTestCompile 'com.android.support.test:rules:0.4'
     // Set this dependency to build and run Espresso tests
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:4.3'
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 }
